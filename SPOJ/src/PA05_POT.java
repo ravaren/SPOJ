@@ -1,4 +1,4 @@
-import java.util.*;
+import java.io.*;
 
 public class PA05_POT {
     
@@ -6,34 +6,54 @@ public class PA05_POT {
   
     static public void main(String[] args) throws java.lang.Exception {
         
-        
-        Scanner reader =  new Scanner(System.in); 
-        int D = reader.nextInt();
-        
+        BufferedReader reader =  new BufferedReader(new InputStreamReader(System.in));        
+        int D = Integer.parseInt(reader.readLine());
         
         for(int x=0;x<D;x++){
-            String input = reader.nextLine();
+            BufferedReader reade =  new BufferedReader(new InputStreamReader(System.in));
+            
+            String input = reade.readLine();
+            System.out.println("##" + input + "##");
             int pauza = input.indexOf(" ");
             long a = Long.parseLong(input.substring(0, pauza));
-            long b = Long.parseLong(input.substring(pauza));
-            System.out.println(a);
-            System.out.println(b);
+            long b = Long.parseLong(input.substring(pauza+1));
             
+            if(a%10==0){System.out.println(0);}
+            if(a%10==1){System.out.println(1);}
+            if(a%10==2){
+                if(b%4==1){System.out.println(2);}
+                if(b%4==2){System.out.println(4);}
+                if(b%4==3){System.out.println(8);}
+                if(b%4==0){System.out.println(6);}
+            }
+            if(a%10==3){
+                if(b%4==1){System.out.println(3);}
+                if(b%4==2){System.out.println(9);}
+                if(b%4==3){System.out.println(7);}
+                if(b%4==0){System.out.println(1);}
+            }
+            if(a%10==4){
+                if(b%2==1){System.out.println(4);}
+                if(b%2==0){System.out.println(6);}
+            }
+            if(a%10==5){System.out.println(5);}
+            if(a%10==6){System.out.println(6);}
+            if(a%10==7){
+                if(b%4==1){System.out.println(7);}
+                if(b%4==2){System.out.println(9);}
+                if(b%4==3){System.out.println(3);}
+                if(b%4==0){System.out.println(1);}
+            }
+            if(a%10==8){
+                if(b%4==1){System.out.println(8);}
+                if(b%4==2){System.out.println(4);}
+                if(b%4==3){System.out.println(2);}
+                if(b%4==0){System.out.println(6);}
+            }
+            if(a%10==9){
+                if(b%2==1){System.out.println(9);}
+                if(b%2==0){System.out.println(1);}
+            }
         }
-        /*
-        for(long el: tab){
-            
-            if(el==0 || el==1){System.out.println(0 + " " + 1);}
-            if(el==2){System.out.println(0 + " " + 2);}
-            if(el==3){System.out.println(0 + " " + 6);}
-            if(el==4){System.out.println(2 + " " + 4);}
-            if(el==5 || el==6){System.out.println(2 + " " + 0);}
-            if(el==7){System.out.println(4 + " " + 0);}
-            if(el==8){System.out.println(2 + " " + 0);}
-            if(el==9){System.out.println(8 + " " + 0);}
-            if(el>9){System.out.println(0 + " " + 0);}
-        
-        }
-        */
     }
 }

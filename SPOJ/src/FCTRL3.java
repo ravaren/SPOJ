@@ -30,39 +30,35 @@ poprawną odpowiedzią jest:
 
 
  */
-import java.util.Scanner;
+import java.io.*;
 
 public class FCTRL3 {
     
-    static int silnia(int n){
-        int wynik=n;
-        if(n>1){wynik*=silnia(n-1);}
-        return wynik;
-    }
-    
-    
-    static public void main(String[] args){
-        Scanner reader = new Scanner(System.in);
-        int D;
-        do{
-           D = reader.nextInt(); 
-        }while (!(D>=1&&D<=30));
+  
+    static public void main(String[] args) throws java.lang.Exception {
         
-        int tab[] = new int[D];
+        //Scanner reader = new Scanner(System.in);
+        BufferedReader reader =  new BufferedReader(new InputStreamReader(System.in)); 
+        int D = Integer.parseInt(reader.readLine()); 
+        
+        long tab[] = new long[D];
         for(int x=0;x<D;x++){
-            int n = -1;
-            do{
-                n = reader.nextInt(); 
-            }while (!(n>=1&&n<=1_000_000_000));  
+            long n = Long.parseLong(reader.readLine()); 
             tab[x] = n;
         }
         
-        for(int el: tab){
-            if(el==1){System.out.println(0 + " " + 1);}
-            else{
-                int y = silnia(el);
-                System.out.println( (y/10) + " " + (y-((y/10)*10)));
-            }    
+        for(long el: tab){
+            
+            if(el==0 || el==1){System.out.println(0 + " " + 1);}
+            if(el==2){System.out.println(0 + " " + 2);}
+            if(el==3){System.out.println(0 + " " + 6);}
+            if(el==4){System.out.println(2 + " " + 4);}
+            if(el==5 || el==6){System.out.println(2 + " " + 0);}
+            if(el==7){System.out.println(4 + " " + 0);}
+            if(el==8){System.out.println(2 + " " + 0);}
+            if(el==9){System.out.println(8 + " " + 0);}
+            if(el>9){System.out.println(0 + " " + 0);}
+        
         }
     }
 }

@@ -10,10 +10,7 @@ public class PA05_POT {
         int D = Integer.parseInt(reader.readLine());
         
         for(int x=0;x<D;x++){
-            BufferedReader reade =  new BufferedReader(new InputStreamReader(System.in));
-            
-            String input = reade.readLine();
-            System.out.println("##" + input + "##");
+            String input = reader.readLine();
             int pauza = input.indexOf(" ");
             long a = Long.parseLong(input.substring(0, pauza));
             long b = Long.parseLong(input.substring(pauza+1));

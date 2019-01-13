@@ -36,12 +36,20 @@ public class PRZEDSZK {
             int a = Integer.parseInt(input.substring(0, pauza));
             int b = Integer.parseInt(input.substring(pauza+1));
             
-            int nwd = 2;
-            while(true){
-                if((a%nwd==0) && (b%nwd==0)){break;}
-                else{nwd++;}
+            if(b>a){
+                b=b+a;
+                a=b-a;
+                b=b-a;
             }
-            System.out.println((a*b)/nwd);
+            
+            int wynik = a;
+            while(true){
+                if(wynik%b==0){
+                    break;                    
+                }
+                else{wynik+=a;}
+            }
+            System.out.println(wynik);          
         }
     }
 }

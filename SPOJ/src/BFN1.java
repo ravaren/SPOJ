@@ -38,36 +38,33 @@ import java.io.*;
 class BFN1 {
     static public void main(String[] args) throws java.lang.Exception{
         
-        String cyferki = "01234567890";
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         int t = Integer.parseInt(reader.readLine());
         
-        masterLoop:        
+        masterLoop:
         for(int x=0;x<t;x++){
             String liczba = reader.readLine();
             int n = Integer.parseInt(liczba);
-            int licznik=0;
-            int wynik;            
-            int[] tab = new int[10];
+            int licznik = 0;
             while(true){
                 if(n<10){
                 System.out.println(n + " " + licznik);
-                continue masterLoop;
+                break;
                 }
-                int parzyste = 0;
-                int nieparzyste = 0;
-                for(int y=0;y<liczba.length();y++){
-                    for(int z=0;z<10;z++){
-                        if(liczba.substring(y,y+1).equals(cyferki.substring(z,z+1))){tab[z]++;}
-                    }
+                String liczbaOdwrotnie = "";
+                for(int i = liczba.length() - 1; i >= 0; i--)
+                    {
+                    liczbaOdwrotnie = liczbaOdwrotnie + liczba.charAt(i);
                 }
-                for(int el: tab){
-                    if(el%2==0 && el!=0){parzyste++;}
-                    else{nieparzyste++;}
-                    el = 0;
+                if(liczba.equals(liczbaOdwrotnie)){
+                    System.out.println(liczba + " " + licznik);
+                    break;
                 }
-                //TUTAJ DOKOŃCZYĆ
-                licznik++;
+                else{
+                    n+=Integer.parseInt(liczbaOdwrotnie);
+                    liczba = Integer.toString(n);
+                    licznik++;
+                }
             }
         }
     }

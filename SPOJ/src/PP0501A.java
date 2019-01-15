@@ -37,19 +37,18 @@ import java.io.*;
 
 public class PP0501A {
     static int nwd(int a, int b){
-        int nwd;
-        int dzielnik = 2;
-        while(true){
-            if(a==1){break;}
-            while(true){
-                
-            }
+        int c;
+        if(b>a){
+            a=a+b;
+            b=a-b;
+            a=a-b;
         }
-        while(true){
-            if(b==1){break;}
-            
-        }
-        return nwd;
+        while(b!=0){
+            c=a%b;
+            a=b;
+            b=c;    
+        }        
+        return a;
     }
     
     public static void main(String[] args) throws java.lang.Exception{

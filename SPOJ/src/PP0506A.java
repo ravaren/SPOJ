@@ -60,7 +60,11 @@ public class PP0506A {
                     }
                 }
                 //DOPISYWANIE WARTOSCI ODLEGLOSCI W DODATKOWA TABLICE
-                odleglosci[y][1] = Math.abs(Integer.parseInt(punkty[y][1])) + Math.abs(Integer.parseInt(punkty[y][2]));                              
+                double a = Math.abs(Double.parseDouble(punkty[y][1]));
+                double b = Math.abs(Double.parseDouble(punkty[y][2]));
+                double wynik = Math.sqrt((a*a) + (b*b));
+                Double odleglosc = new Double(wynik);
+                odleglosci[y][1] = odleglosc.intValue();                              
             }
             for(int y=0;y<n-1;y++){ //SORTOWANIE DODATKOWEJ TABLICY
                 if(odleglosci[y][1]>odleglosci[y+1][1]&&y!=n-1){
@@ -77,7 +81,7 @@ public class PP0506A {
             for(int y=0;y<n;y++){ //WYPISYWANIE POSORTOWANYCH PUNKTOW
                 System.out.println(punkty[odleglosci[y][0]][0] + " " + punkty[odleglosci[y][0]][1] + " " + punkty[odleglosci[y][0]][2]);
             }
-            System.out.println(reader.readLine()); //POŻERANIE JEDNEJ LINII WEJŚCIA NA KONIEC TESTU
+            if(x!=t-1){System.out.println(reader.readLine());} //POŻERANIE JEDNEJ LINII WEJŚCIA NA KONIEC TESTU
         }
     }
 }

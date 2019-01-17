@@ -60,11 +60,7 @@ public class PP0506A {
                     }
                 }
                 //DOPISYWANIE WARTOSCI ODLEGLOSCI W DODATKOWA TABLICE
-                double a = Math.abs(Double.parseDouble(punkty[y][1]));
-                double b = Math.abs(Double.parseDouble(punkty[y][2]));
-                double wynik = Math.sqrt((a*a) + (b*b));
-                Double odleglosc = new Double(wynik);
-                odleglosci[y][1] = odleglosc.intValue();                              
+                odleglosci[y][1] = (Integer.parseInt(punkty[y][1])*Integer.parseInt(punkty[y][1])) + (Integer.parseInt(punkty[y][2])*Integer.parseInt(punkty[y][2]));                              
             }
             for(int y=0;y<n-1;y++){ //SORTOWANIE DODATKOWEJ TABLICY
                 if(odleglosci[y][1]>odleglosci[y+1][1]&&y!=n-1){

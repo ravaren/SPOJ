@@ -85,74 +85,164 @@ public class FANGEN {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         int r = Integer.parseInt(reader.readLine());
         while(r!=0){
-            int n = 2*Math.abs(r);
+            boolean prawoskret;
+            if(r<0){prawoskret=false;}
+            else{prawoskret=true;}
+            r = Math.abs(r);
+            int n = 2*r;
             char[][] fan = new char[n][n];
             //WYPEŁNIANIE * i ?
             for(int x=0;x<n;x++){
                 for(int y=0;y<n;y++){
-                    if( (x==r-1||x==r)&&(y==r-1||y==r) ){fan[x][y] = '*';}
+                    if(y==x){fan[x][y]='*';}
                     else{
-                        if( (x==n-1||x==0)&&(y==n-1||y==0) ){fan[x][y] = '*';}
-                        else{fan[x][y] = '?';}
+                        if(x+y==n-1){fan[x][y]='*';}
+                        else{fan[x][y]='?';}
                     }
                 }
             }
             
-            for(int R=Math.abs(r);R>1;R--){
+            //PETLA DLA KAZDEGO "OKREGU"
+            if(prawoskret){ //DLA LEWOSKRETU (r>0)
+                for(int R=1;R<r;R++){
+                    //ustalenie licznika dla znakow . *
+                    int licznik = 0; 
+                    boolean gwiazdka = true;
+                    
+                    //LEWO
+                    for(int x=n-R-1;x>=R;x--){
+                        if(gwiazdka){
+                            fan[x][n-R]='*';
+                            licznik++;
+                        }
+                        else{
+                            fan[x][n-R]='.';
+                            licznik++;
+                        }
+                        if(licznik==r-R){
+                            gwiazdka=!gwiazdka;
+                            licznik=0;
+                        }                        
+                    }
+                    //DOL
                 
+                    for(int y=n-R-1;y>=R;y--){
+                        if(gwiazdka){
+                            fan[R-1][y]='*';
+                            licznik++;
+                        }
+                        else{
+                            fan[R-1][y]='.';
+                            licznik++;
+                        }
+                        if(licznik==r-R){
+                            gwiazdka=!gwiazdka;
+                            licznik=0;
+                        }                       
+                    }
+                     //PRAWO               
+                    for(int x=R;x<n-R;x++){
+                        if(gwiazdka){
+                            fan[x][R-1]='*';
+                            licznik++;
+                        }
+                        else{
+                            fan[x][R-1]='.';
+                            licznik++;
+                        }
+                        if(licznik==r-R){
+                            gwiazdka=!gwiazdka;
+                            licznik=0;
+                        }
+                    }
+                    //GORA
+                    for(int y=R;y<n-R;y++){
+                        if(gwiazdka){
+                            fan[n-R][y]='*';
+                            licznik++;
+                        }
+                        else{
+                            fan[n-R][y]='.';
+                            licznik++;
+                        }
+                        if(licznik==r-R){
+                            gwiazdka=!gwiazdka;
+                            licznik=0;
+                        }
+                    }                   
+                }               
+            }
+            else{ //DLA PRAWOSKRETU r<0
+                for(int R=1;R<r;R++){
+                    //ustalenie licznika dla znakow . *
+                    int licznik = 0; 
+                    boolean gwiazdka = true;
+                    //GORA
+                    for(int y=R;y<n-R;y++){
+                        if(gwiazdka){
+                            fan[R-1][y]='*';
+                            licznik++;
+                        }
+                        else{
+                            fan[R-1][y]='.';
+                            licznik++;
+                        }
+                        if(licznik==r-R){
+                            gwiazdka=!gwiazdka;
+                            licznik=0;
+                        }
+                    }
+                    //PRAWO               
+                    for(int x=R;x<n-R;x++){
+                        if(gwiazdka){
+                            fan[x][n-R]='*';
+                            licznik++;
+                        }
+                        else{
+                            fan[x][n-R]='.';
+                            licznik++;
+                        }
+                        if(licznik==r-R){
+                            gwiazdka=!gwiazdka;
+                            licznik=0;
+                        }
+                    }
+                    //DOL
+                
+                    for(int y=n-R-1;y>=R;y--){
+                        if(gwiazdka){
+                            fan[n-R][y]='*';
+                            licznik++;
+                        }
+                        else{
+                            fan[n-R][y]='.';
+                            licznik++;
+                        }
+                        if(licznik==r-R){
+                            gwiazdka=!gwiazdka;
+                            licznik=0;
+                        }
+                    }
+                
+                    //LEWO
+                    for(int x=n-R-1;x>=R;x--){
+                        if(gwiazdka){
+                            fan[x][R-1]='*';
+                            licznik++;
+                        }
+                        else{
+                            fan[x][R-1]='.';
+                            licznik++;
+                        }
+                        if(licznik==r-R){
+                            gwiazdka=!gwiazdka;
+                            licznik=0;
+                         }
+                    }
+                }
             }
             
-            /*
-            //WYPEŁNIANIE . i * PRAWOSKRĘT
-            boolean gwiazdkaKropka = true;
-            for(int R=0;R<r;R++){
-                int licznik = 0;
-                //POZIOMA GÓRNA
-                int x = R;
-                for(int Y=R;Y<n-R;Y++){
-                    if(fan[x][Y]=='?' && gwiazdkaKropka){
-                        fan[x][Y]='*';
-                        if(licznik==r){
-                            gwiazdkaKropka = !gwiazdkaKropka;
-                            licznik=0;
-                        }
-                        else{licznik++;}
-                    }
-                    else{
-                        if(fan[x][Y]=='?' && !gwiazdkaKropka){
-                        fan[x][Y]='.';
-                        if(licznik==r){
-                            gwiazdkaKropka = !gwiazdkaKropka;
-                            licznik=0;
-                        }
-                        else{licznik++;}
-                        }
-                    }
-                }
-                //PIONOWA PRAWA
-                int y = R+1;
-                for(int X=R;X<n-R;X++){
-                    if(fan[X][y]=='?' && gwiazdkaKropka){
-                        fan[X][y]='*';
-                        if(licznik==r){
-                            gwiazdkaKropka = !gwiazdkaKropka;
-                            licznik=0;
-                        }
-                        else{licznik++;}
-                    }
-                    else{
-                        if(fan[X][y]=='?' && !gwiazdkaKropka){
-                        fan[X][y]='.';
-                        if(licznik==r){
-                            gwiazdkaKropka = !gwiazdkaKropka;
-                            licznik=0;
-                        }
-                        else{licznik++;}
-                        }
-                    }
-                }
-            }
-            */
+            
             //RYSOWANIE
             for(int x=0;x<n;x++){
                 for(int y=0;y<n;y++){

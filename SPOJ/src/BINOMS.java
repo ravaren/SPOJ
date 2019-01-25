@@ -29,51 +29,6 @@ Output:
 import java.io.*;
 
 public class BINOMS {
-    static int charToInt(char szukana){
-		int wynik = 0;
-		char[] cyfry = {0,1,2,3,4,5,6,7,8,9};
-		for(int x=0;x<10;x++){
-			if(szukana==cyfry[x]){
-				wynik = x;
-				break;
-			}
-		}
-		
-		return wynik;	
-	}
-	
-static String mnozenie(String a, String b){
-	String wynik = "";
-	int suma=0;
-	char[]tabA = new char[a.length()];
-	char[]tabB = new char[b.length()];
-		
-	for(int x=0;x<a.length();x++){
-		tabA[x] = a.charAt(x);
-	}
-	for(int x=0;x<b.length();x++){
-		tabB[x] = b.charAt(x);
-	}
-		
-	for(int x=0;x<a.length();x++){
-		for(int y=0;y<a.length();y++){
-			suma+=(charToInt(tabA[x])*charToInt(tabB[y]))*Math.pow(10,x);
-				
-		}
-	}
-		
-        return wynik;
-    }
-    static String silniaZnakowa(String n){
-        String wynik ="";
-        if(n.equals("0")||n.equals("1")){return "1";}
-        else{return wynik;}
-    }
-    
-    static long silniaLiczbowa(long x){
-        if(x>1){return x*silniaLiczbowa(x-1);}
-        else{return 1L;}
-    }
     
     public static void main(String[] args) throws java.lang.Exception{
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -81,11 +36,57 @@ static String mnozenie(String a, String b){
         for(int t=0;t<T;t++){
             String input = reader.readLine();
             int pauza = input.indexOf(" ");
-            String n = input.substring(0,pauza);
-            String k = input.substring(pauza+1);
+            long n = Long.parseLong(input.substring(0,pauza));
+            long k = Long.parseLong(input.substring(pauza+1));
+            long silniaN =1;
+            long silniaK =1;
+            long silniaNminusK=1;
+            if(n==0) {
+                silniaN=1;
+            }
+            else{
+                for (int j=1; j<=n;j++){
+                    silniaN = silniaN * j;
+                }
+            }
+            if(k==0) {
+                silniaK=1;
+            } 
+            else{
+                for (int l=1; l<=k;l++){
+                    silniaK = silniaK * l;
+                }
+            }
+            if ((n==0) && (k == 0)) { 
+                silniaNminusK=1;
+            } 
+            else{
+                for (int h=1; h<=n-k;h++){
+                    silniaNminusK = silniaNminusK * h;
+                }
+            }
+            long wynik = silniaN/(silniaK*silniaNminusK);
+            System.out.format("%d%n", wynik);
+            /*
+            if(k>=0&&n>=k){
+                if(k+k>n){k=n-k+1;}
+                double dzielna=1; 
+                double dzielnik=1;
+                if(n==k){System.out.println(1);}
+                else{
+                    for(double x = 1;x<=k;x++){
+                        dzielna*=n;
+                        dzielnik*=x;
+                        n--;
+                    }
+                    double wynik = dzielna/dzielnik;
+                    //System.out.printf("% 4d",wynik);
+                    System.out.format("%.0f%n", wynik);
+                }
+            }
             
-            //System.out.println(silnia(n)/(silnia(k)*silnia(n-k)));
-            //System.out.println(silnia(n) + " " + silnia(k));
+            else{System.out.println(0);}
+            */
         }
     }
 }
